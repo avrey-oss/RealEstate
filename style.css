@@ -1,0 +1,375 @@
+/* ==========================================================
+   Apartment Finder
+   Base Styles
+   ========================================================== */
+
+:root{
+
+    --primary:#2563eb;
+    --primary-hover:#1d4ed8;
+
+    --background:#f5f7fb;
+
+    --card:#ffffff;
+
+    --text:#1f2937;
+
+    --muted:#6b7280;
+
+    --border:#e5e7eb;
+
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+
+    --radius:18px;
+
+}
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    background:var(--background);
+
+    font-family:"Inter",sans-serif;
+
+    color:var(--text);
+
+    min-height:100vh;
+
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 40px;
+
+    background:white;
+
+    border-bottom:1px solid var(--border);
+
+    box-shadow:0 5px 18px rgba(0,0,0,.05);
+
+}
+
+.logo{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}
+
+.searchBox{
+
+    width:500px;
+
+    max-width:100%;
+
+}
+
+.searchBox input{
+
+    width:100%;
+
+    padding:15px 20px;
+
+    border-radius:999px;
+
+    border:1px solid var(--border);
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.25s;
+
+}
+
+.searchBox input:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.15);
+
+}
+
+/* =========================================
+   FILTER BAR
+========================================= */
+
+.filters{
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    padding:22px 40px;
+
+}
+
+.filters button{
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:999px;
+
+    padding:10px 18px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-weight:600;
+
+}
+
+.filters button:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+    border-color:var(--primary);
+
+}
+
+/* =========================================
+   MAIN
+========================================= */
+
+main{
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:20px;
+
+}
+
+/* =========================================
+   LISTING GRID
+========================================= */
+
+#listingGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(360px,1fr));
+
+    gap:28px;
+
+}
+
+/* =========================================
+   LOADING
+========================================= */
+
+#loading{
+
+    text-align:center;
+
+    padding:80px;
+
+    font-size:20px;
+
+    color:var(--muted);
+
+}
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.55);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+
+    z-index:5000;
+
+}
+
+.modal.show{
+
+    display:flex;
+
+    animation:fade .25s;
+
+}
+
+.modalContent{
+
+    background:white;
+
+    width:min(1200px,95vw);
+
+    max-height:92vh;
+
+    overflow:auto;
+
+    border-radius:24px;
+
+    box-shadow:var(--shadow);
+
+    position:relative;
+
+    animation:slide .35s ease;
+
+}
+
+#closeModal{
+
+    position:absolute;
+
+    right:18px;
+
+    top:18px;
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    background:#f3f4f6;
+
+    transition:.2s;
+
+}
+
+#closeModal:hover{
+
+    background:#e5e7eb;
+
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+@keyframes slide{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:900px){
+
+header{
+
+    flex-direction:column;
+
+    gap:15px;
+
+    padding:20px;
+
+}
+
+.searchBox{
+
+    width:100%;
+
+}
+
+.filters{
+
+    padding:20px;
+
+}
+
+}
+
+@media(max-width:600px){
+
+#listingGrid{
+
+    grid-template-columns:1fr;
+
+}
+
+}
