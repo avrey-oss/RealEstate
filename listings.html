@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>Apartment Listings</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f5f5f5;
+    margin:0;
+}
+
+h1{
+    text-align:center;
+}
+
+#listings{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(350px,1fr));
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.gallery img{
+    width:100%;
+    display:block;
+    margin-bottom:8px;
+}
+
+.gallery video{
+    width:100%;
+    margin-bottom:8px;
+}
+
+.info{
+    padding:15px;
+}
+
+.info h2{
+    margin:0;
+}
+
+.price{
+    color:green;
+    font-size:22px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Available Apartments</h1>
+
+<div id="listings"></div>
+
+<script>
+const API = "https://script.google.com/macros/s/AKfycbxhU2wenXwPhnmZPnBk7BSdheUZWP2-vNAjYFtIVJUE-NZwPvYnVQNEt9iNiOUF748muQ/exec";
+
+async function loadListings() {
+
+    const response = await fetch(API + "?action=list");
+    const listings = await response.json();
+
+    const container = document.getElementById("listings");
+
+    container.innerHTML = "";
+
+    listings.forEach(listing => {
+
+        const images = listing.images
+            .map(img => `<img src="${img}" class="listing-image">`)
+            .join("");
+
+        const video = listing.video
+            ? `<video controls width="100%">
+                    <source src="${listing.video}">
+               </video>`
+            : "";
+
+        container.innerHTML += `
+
+        <div class="listing">
+
+            <h2>${listing.property}</h2>
+
+            <p>${listing.address}</p>
+
+            <p>$${listing.price}</p>
+
+            <p>${listing.beds} Bed • ${listing.baths} Bath • ${listing.sqft} Sq Ft</p>
+
+            <p>${listing.amenities}</p>
+
+            <div class="gallery">
+                ${images}
+            </div>
+
+            ${video}
+
+            <button onclick="openListing('${listing.id}')">
+                View Details
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+async function openListing(id){
+
+    const response = await fetch(API + "?action=get&id=" + id);
+    const listing = await response.json();
+
+    console.log(listing);
+
+}
+
+loadListings();
+</script>
+
+</body>
+</html>
