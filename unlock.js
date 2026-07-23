@@ -768,3 +768,5 @@ function buildNotes(){
     return true;
 
 }
+
+console.log("unlock.js loaded");
