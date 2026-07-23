@@ -584,7 +584,6 @@ Unlock Listing
    Wizard Navigation
 ========================================== */
 
-let currentStep = 1;
 
 function showStep(step){
 
